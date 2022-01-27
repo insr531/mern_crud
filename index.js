@@ -19,9 +19,9 @@ mongoose.connect(
     "mongodb+srv://orange:1234@cluster0.e3gqb.mongodb.net/mern_crud?retryWrites=true&w=majority"
 );
 
-// app.get('/', (req,res) => {
-//     res.send("Manchester UP!");
-// })
+app.get('/db', (req,res) => {
+    res.send("Manchester UP!");
+})
 
 app.get("/getUsers", async (req, res) => {
     UserModel.find({}, (err, result) => {
