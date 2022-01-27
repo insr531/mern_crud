@@ -16,14 +16,15 @@ if (process.env.NODE_ENV === 'production'){
 const port = process.env.PORT || 8080;
 
 mongoose.connect(
-    "mongodb+srv://orange:1234@cluster0.e3gqb.mongodb.net/mern_crud?retryWrites=true&w=majority"
+    "mongodb+srv://orange:1234@cluster0.e3gqb.mongodb.net/mern_crud?retryWrites=true&w=majority",
+    { useNewUrlParser: true}
 );
 
 app.get('/db', (req,res) => {
     res.send("Manchester UP!");
 })
 
-app.get("/getUsers", async (req, res) => {
+app.get("/getUsers", (req, res) => {
     UserModel.find({}, (err, result) => {
         if (err) {
             res.json(err);
