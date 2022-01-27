@@ -1,17 +1,12 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
-const UserModel = require('./models/Users');
-
 const cors = require('cors');
+const UserModel = require('./models/Users');
 
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(cors());
-
-if (process.env.NODE_ENV === 'production'){
-    app.use(express.static("client/build"));
-}
 
 const port = process.env.PORT || 8080;
 
@@ -19,9 +14,7 @@ mongoose.connect("mongodb+srv://orange:1234@cluster0.e3gqb.mongodb.net/mern_crud
        { useNewUrlParser: true}
 );
 
-app.get('/db', (req,res) => {
-    res.send("Manchester UP!");
-})
+app.use(express.static("client/build"));
 
 app.get("/getUsers", (req, res) => {
     UserModel.find({}, (err, result) => {

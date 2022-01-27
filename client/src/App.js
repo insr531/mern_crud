@@ -5,10 +5,8 @@ import Axios from 'axios';
 function App() {
   const [listOfUsers, setListOfUsers] = useState([]);
   const [name, setName] = useState("");
-  const [age, setAge] = useState("");
-  const [username, setUsername] = useState("");
+  const [location, setLocation] = useState("");
 
-  //http://localhost:3001
   useEffect(() => {
     Axios.get("/getUsers").then((response) => {
       setListOfUsers(response.data)
@@ -17,33 +15,53 @@ function App() {
 
   const createUser = () => {
     Axios.post("/createUser", {
-      name: name, age: age, username: username
+      name: name, location: location
     }).then((response) => {
-      setListOfUsers([...listOfUsers, { name, age, username }]);
+      setListOfUsers([...listOfUsers, { name, location}]);
       alert("USER CREATED!");
     });
   };
 
+  //function uses listOfUsers state
+  let i = 0;
+  const map_table_rows = listOfUsers.map((user) => {
+    i++;
+    return (
+      <tr>
+        <th scope="row">{i}</th>
+        <td>{user.name}</td>
+        <td>{user.location}</td>
+        <td>EDIT</td>
+        <td>Delete</td>
+      </tr>
+    )
+  });
+
   return (
     <div className="App">
-      <div className="usersDisplay">
-        {listOfUsers.map((user) => {
-          return (
-            <div>
-              <h1>Name: {user.name}</h1>
-              <h1>Name: {user.age}</h1>
-              <h1>Name: {user.username}</h1>
-            </div>
-          );
-        })}
-      </div>
-
       <div>
         <input type="text" placeholder="Name..." onChange={(event) => { setName(event.target.value); }} />
-        <input type="number" placeholder="Age..." onChange={(event) => { setAge(event.target.value); }} />
-        <input type="text" placeholder="Username..." onChange={(event) => { setUsername(event.target.value); }} />
-        <button onClick={createUser} >Create User</button>
+        <input type="text" placeholder="Location..." onChange={(event) => { setLocation(event.target.value); }} />
+        <button onClick={createUser}>Create User</button>
       </div>
+
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Location</th>
+            <th scope="col">EDIT</th>
+            <th scope="col">Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          {map_table_rows}
+
+        </tbody>
+      </table>
+
     </div>
   );
 }

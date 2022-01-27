@@ -1,15 +1,17 @@
 const mongoose = require('mongoose');
 
+var minuteFromNow = function () {
+    var timeObject = new Date();
+    timeObject.setTime(timeObject.getTime() + 1000 * 60);
+    return timeObject;
+};
+
 const UserSchema = new mongoose.Schema({
-    name:{
+    name: {
         type: String,
         require: true
     },
-    age: {
-        type: Number,
-        require: true
-    },
-    username:{
+    location: {
         type: String,
         require: true
     }
