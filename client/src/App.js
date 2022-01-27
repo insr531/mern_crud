@@ -8,14 +8,15 @@ function App() {
   const [age, setAge] = useState("");
   const [username, setUsername] = useState("");
 
+  //http://localhost:3001
   useEffect(() => {
-    Axios.get("http://localhost:3001/getUsers").then((response) => {
+    Axios.get("/getUsers").then((response) => {
       setListOfUsers(response.data)
     })
   }, []);
 
   const createUser = () => {
-    Axios.post("http://localhost:3001/createUser", {
+    Axios.post("/createUser", {
       name: name, age: age, username: username
     }).then((response) => {
       setListOfUsers([...listOfUsers, { name, age, username }]);
