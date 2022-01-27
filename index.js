@@ -16,7 +16,7 @@ if (process.env.NODE_ENV === 'production'){
 const port = process.env.PORT || 8080;
 
 // "mongodb+srv://orange:1234@cluster0.e3gqb.mongodb.net/mern_crud?retryWrites=true&w=majority",
-mongoose.connect(process.env.MONGODB_URI,
+mongoose.connect(process.env.MONGODB_URL,
        { useNewUrlParser: true}
 );
 
