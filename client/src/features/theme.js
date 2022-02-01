@@ -4,11 +4,11 @@ export const themeSlice = createSlice({
     name: "theme",
     initialState: { value: "" },
     reducers: {
-        changeColor: (state, action) => {
+        themeColor: (state, action) => {
             state.value = action.payload;
         }
     },
 });
 
-export const { changeColor } = themeSlice.actions;
+export const { themeColor } = themeSlice.actions;
 export default themeSlice.reducer;
