@@ -35,6 +35,28 @@ app.post("/createUser", async (req, res) => {
 });
 
 
+app.put("/updateUser/:id", async (req, res) => {
+    const user = req.body;
+    UserModel.findByIdAndUpdate(req.params.id, req.body, (err, result) => {
+        if (err) {
+            res.json(err);
+        } else {
+            res.json(result);
+        }
+    });
+});
+
+app.delete("/deleteUser/:id", async (req, res) => {
+    const user = req.body;
+    UserModel.findByIdAndRemove(req.params.id, (err, result) => {
+        if (err) {
+            res.json(err);
+        } else {
+            res.json(result);
+        }
+    });
+});
+
 app.listen(port, () => {
     console.log("SERVER RUNS!");
 });

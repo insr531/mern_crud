@@ -2,10 +2,23 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { configureStore } from '@reduxjs/toolkit';
+import { Provider } from 'react-redux';
+import themeReducer  from './features/theme';
+import updateUserReducer  from './features/updateUser';
+
+const store = configureStore({
+  reducer: {
+    theme: themeReducer,
+    updateUser: updateUserReducer
+  },
+});
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
